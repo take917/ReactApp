@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { List } from "./List";
 import "./styles.css";
 import { Form } from "./Form";
-import { LANGUAGES } from "./languages";
+import { getLanguages, LANGUAGES } from "./languages";
 import styled from "styled-components";
+import { withLoading } from "./hoc/withLoading";
 
 const Header = styled.header`
   display: flex;
@@ -22,13 +23,10 @@ const HeaerLi = styled.li`
   cursor: pointer;
   border-bottom: ${(props) => (props.focused ? "2px solid #F44336" : "none")};
 `;
-function App() {
+function App({ data }) {
   const [tab, setTab] = useState("list");
-  const [langs, setLangs] = useState(LANGUAGES);
+  const [langs, setLangs] = useState(data);
 
-  useEffect(() => {
-    console.log("App.js:useEffect");
-  });
   const addLang = (lang) => {
     setLangs([...langs, lang]);
     setTab("list");
@@ -61,4 +59,4 @@ function App() {
     </div>
   );
 }
-export default App;
+export default withLoading(App, getLanguages);
