@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "./components/button";
 import styled from "styled-components";
 import { TabBodyContainer } from "./components/tab-body-container";
+import { FormModal } from "./FormModal";
 
 const Label = styled.label`
   display: flex;
@@ -25,9 +26,10 @@ const FormButton = styled(Button)`
 
 export const Form = ({ onAddLang }) => {
   const [text, setText] = useState("");
-  const submitForm = (event) => {
-    event.preventDefault();
-    onAddLang(text);
+  const [showModal, setShowModal] = useState(false);
+  const submitForm = (e) => {
+    e.preventDefault();
+    setShowModal(true);
   };
   return (
     <TabBodyContainer title="新しい言語の追加">
@@ -44,6 +46,18 @@ export const Form = ({ onAddLang }) => {
           <FormButton>追加</FormButton>
         </ButtonContainer>
       </form>
+      {showModal && (
+        <FormModal>
+          consfirm=
+          {() => {
+            onAddLang(text);
+          }}
+          cancel=
+          {() => {
+            setShowModal(false);
+          }}
+        </FormModal>
+      )}
     </TabBodyContainer>
   );
 };

@@ -5,6 +5,7 @@ import { Form } from "./Form";
 import { getLanguages, LANGUAGES } from "./languages";
 import styled from "styled-components";
 import { withLoading } from "./hoc/withLoading";
+import { Modal } from "./components/modal";
 
 const Header = styled.header`
   display: flex;
@@ -56,6 +57,7 @@ function App({ data }) {
       </Header>
 
       {tab === "list" ? <List langs={langs} /> : <Form onAddLang={addLang} />}
+      <Modal />
     </div>
   );
 }
